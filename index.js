@@ -1,9 +1,20 @@
 /*
 小肥牛扫码点餐项目API子系统
 */ 
+console.log(new Date().toLocaleString());
+console.log("准备启动API服务器....")
+
 const port = 8090;
 const express = require("express");
+const categoryRouter = require('./routes/admin/category')
+const adminRouter = require('./routes/admin/admin')
+const cors = require('cors')
+const bodyParser = require("body-parser")
 var app = express();
 app.listen(port,()=>{
-    console.log("Server Listening"+port+"...");
-})
+    console.log("Sereve Listening:"+port);
+});
+app.use(cors());
+app.use(bodyParser.json())
+app.use('/admin/category',categoryRouter);
+app.use('/admin',adminRouter);
